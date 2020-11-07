@@ -1,5 +1,7 @@
 #include "utils.h"
 #include "camera.h"
+#include "perlin.h"
+#include "createimage.h"
 
 int width = 640, height=640;
 
@@ -21,84 +23,145 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 
+std::vector<float> generateNoiseMap(int chunkHeight, int chunkWidth, int octaves, float persistence, float lacunarity, float noiseScale);
+
 int main(int, char**)
-{
-    // Setup window
-    GLFWwindow *window = setupWindow(width, height);
-    ImGuiIO& io = ImGui::GetIO(); // Create IO object
-    // glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, mouse_callback);
-    glfwSetScrollCallback(window, scroll_callback);
-
-    // tell GLFW to capture our mouse
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-    ImVec4 clearColor = ImVec4(1.0f, 1.0f, 1.0f, 1.00f);
-
-    unsigned int shaderProgram = createProgram("./shaders/vshader.vs", "./shaders/fshader.fs");
-    glUseProgram(shaderProgram);
-
-    unsigned int VAO;
-    glGenVertexArrays(1, &VAO);
-
-    setupModelTransformation(shaderProgram);
-    setupProjectionTransformation(shaderProgram, width , height);
-
-    createCubeObject(shaderProgram, VAO);
-
-    while (!glfwWindowShouldClose(window))
-    {
-
-        float currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
-
-        // input
-        // -----
-        processInput(window);
-
-        glfwPollEvents();
-        setupViewTransformation(shaderProgram);
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
-
-        glUseProgram(shaderProgram);
-
-        {
-            static float f = 0.0f;
-            static int counter = 0;
-
-            ImGui::Begin("Information");
-            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-            ImGui::End();
-        }
-
-        // Rendering
-        ImGui::Render();
-        int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glBindVertexArray(VAO);
-
-        glDrawArrays(GL_TRIANGLES, 0, 6*2*3);
-
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-        glfwSwapBuffers(window);
-
+{   
+    int height = 1024;
+    int width = 1024;
+    
+    std::vector<float> noiseMap = generateNoiseMap(height, width, 5, 0.5f, 2.0f, 32.0f);
+    int isImageCreated = createImage(height, width, noiseMap, "test");
+    if(isImageCreated==0){
+        std::cout << "Image successfully created" <<std::endl;
     }
 
-    // Cleanup
-    cleanup(window);
+    // // Setup window
+    // GLFWwindow *window = setupWindow(width, height);
+    // ImGuiIO& io = ImGui::GetIO(); // Create IO object
+    // // glfwMakeContextCurrent(window);
+    // glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    // glfwSetCursorPosCallback(window, mouse_callback);
+    // glfwSetScrollCallback(window, scroll_callback);
 
-    return 0;
+    // // tell GLFW to capture our mouse
+    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    // ImVec4 clearColor = ImVec4(1.0f, 1.0f, 1.0f, 1.00f);
+
+    // unsigned int shaderProgram = createProgram("./shaders/vshader.vs", "./shaders/fshader.fs");
+    // glUseProgram(shaderProgram);
+
+    // unsigned int VAO;
+    // glGenVertexArrays(1, &VAO);
+
+    // setupModelTransformation(shaderProgram);
+    // setupProjectionTransformation(shaderProgram, width , height);
+
+    // createCubeObject(shaderProgram, VAO);
+
+    // while (!glfwWindowShouldClose(window))
+    // {
+
+    //     float currentFrame = glfwGetTime();
+    //     deltaTime = currentFrame - lastFrame;
+    //     lastFrame = currentFrame;
+
+    //     // input
+    //     // -----
+    //     processInput(window);
+
+    //     glfwPollEvents();
+    //     setupViewTransformation(shaderProgram);
+    //     // Start the Dear ImGui frame
+    //     ImGui_ImplOpenGL3_NewFrame();
+    //     ImGui_ImplGlfw_NewFrame();
+    //     ImGui::NewFrame();
+
+    //     glUseProgram(shaderProgram);
+
+    //     {
+    //         static float f = 0.0f;
+    //         static int counter = 0;
+
+    //         ImGui::Begin("Information");
+    //         ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+    //         ImGui::End();
+    //     }
+
+    //     // Rendering
+    //     ImGui::Render();
+    //     int display_w, display_h;
+    //     glfwGetFramebufferSize(window, &display_w, &display_h);
+    //     glViewport(0, 0, display_w, display_h);
+    //     glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
+    //     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    //     glBindVertexArray(VAO);
+
+    //     glDrawArrays(GL_TRIANGLES, 0, 6*2*3);
+
+    //     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+    //     glfwSwapBuffers(window);
+
+    // }
+
+    // // Cleanup
+    // cleanup(window);
+
+    // return 0;
 }
+
+
+std::vector<float> generateNoiseMap(int chunkHeight, int chunkWidth, int octaves, float persistence, float lacunarity, float noiseScale) {
+    std::vector<float> noiseValues;
+    std::vector<float> normalizedNoiseValues;
+    
+    int offsetX = 1;
+    int offsetY = 1;
+    
+    float amp  = 1;
+    float freq = 1;
+    float maxPossibleHeight = 0;
+    
+    for (int i = 0; i < octaves; i++) {
+        maxPossibleHeight += amp;
+        amp *= persistence;
+    }
+    
+    for (int y = 0; y < chunkHeight; y++) {
+        for (int x = 0; x < chunkWidth; x++) {
+            amp  = 1;
+            freq = 1;
+            float noiseHeight = 0;
+            for (int i = 0; i < octaves; i++) {
+                float xSample = (x + offsetX * (chunkWidth-1))  / noiseScale * freq;
+                float ySample = (y + offsetY * (chunkHeight-1)) / noiseScale * freq;
+                
+                float perlinValue = getPerlinNoise(xSample, ySample);
+                noiseHeight += perlinValue * amp;
+                
+                // Lacunarity  --> Increase in frequency of octaves
+                // Persistence --> Decrease in amplitude of octaves
+                amp  *= persistence;
+                freq *= lacunarity;
+            }
+            
+            noiseValues.push_back(noiseHeight);
+        }
+    }
+    
+    for (int y = 0; y < chunkHeight; y++) {
+        for (int x = 0; x < chunkWidth; x++) {
+            // Inverse lerp and scale values to range from 0 to 1
+            normalizedNoiseValues.push_back((noiseValues[x + y*chunkWidth] + 1) / maxPossibleHeight);
+        }
+    }
+
+    return normalizedNoiseValues;
+}
+
 
 void createCubeObject(unsigned int &program, unsigned int &cube_VAO)
 {

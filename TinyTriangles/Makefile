@@ -17,7 +17,7 @@
 EXE = ./TinyTriangle
 SOURCES = ./src/main.cpp
 SOURCES += ../depends/imgui/imgui_impl_glfw.cpp ../imgui_impl_opengl3.cpp
-SOURCES += ./src/utils.cpp 
+SOURCES += ./src/utils.cpp ./src/perlin.cpp ./src/createimage.cpp 
 SOURCES += ../../depends/imgui/imgui.cpp ../../depends/imgui/imgui_demo.cpp ../../depends/imgui/imgui_draw.cpp ../../depends/imgui/imgui_widgets.cpp
 
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
