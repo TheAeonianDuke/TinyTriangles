@@ -1,4 +1,5 @@
-//https://github.com/LiamHz/atlas/blob/master/perlin.h
+//https://mrl.cs.nyu.edu/~perlin/noise/ - Ken Perlin's Implementation
+
 #include "perlin.h"
 double fade(double t) { return t * t * t * (t * (t * 6 - 15) + 10); };
     

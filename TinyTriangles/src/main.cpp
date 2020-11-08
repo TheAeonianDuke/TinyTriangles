@@ -2,6 +2,7 @@
 #include "camera.h"
 #include "perlin.h"
 #include "createimage.h"
+#include "terrain.h"
 
 int width = 640, height=640;
 
@@ -14,6 +15,7 @@ float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
 void createCubeObject(unsigned int &, unsigned int &);
+void createPlane(int height, int width, std::vector<float> noiseMap, unsigned int &program, unsigned int &plane_VAO);
 void setupModelTransformation(unsigned int &);
 void setupViewTransformation(unsigned int &);
 void setupProjectionTransformation(unsigned int &, int, int);
@@ -27,90 +29,100 @@ std::vector<float> generateNoiseMap(int chunkHeight, int chunkWidth, int octaves
 
 int main(int, char**)
 {   
-    int height = 1024;
-    int width = 1024;
+
+    int mapHeight = 100;
+    int mapWidth = 100;
+    int octaves = 5;
+    float persistence = 0.5f; // Persistence --> Decrease in amplitude of octaves               
+    float lacunarity = 2.0f; // Lacunarity  --> Increase in frequency of octaves
+    float noiseScale = 64.0f;
+
     
-    std::vector<float> noiseMap = generateNoiseMap(height, width, 5, 0.5f, 2.0f, 32.0f);
-    int isImageCreated = createImage(height, width, noiseMap, "test");
+    // Generate height map using perlin noise
+    std::vector<float> noiseMap = generateNoiseMap(mapHeight, mapWidth, octaves, persistence, lacunarity, noiseScale);
+    
+    // Create image of map
+    int isImageCreated = createImage(mapHeight, mapWidth, noiseMap, "test");
     if(isImageCreated==0){
         std::cout << "Image successfully created" <<std::endl;
     }
 
-    // // Setup window
-    // GLFWwindow *window = setupWindow(width, height);
-    // ImGuiIO& io = ImGui::GetIO(); // Create IO object
-    // // glfwMakeContextCurrent(window);
-    // glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    // glfwSetCursorPosCallback(window, mouse_callback);
-    // glfwSetScrollCallback(window, scroll_callback);
 
-    // // tell GLFW to capture our mouse
-    // glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    // Setup window
+    GLFWwindow *window = setupWindow(width, height);
+    ImGuiIO& io = ImGui::GetIO(); // Create IO object
+    // glfwMakeContextCurrent(window);
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetScrollCallback(window, scroll_callback);
 
-    // ImVec4 clearColor = ImVec4(1.0f, 1.0f, 1.0f, 1.00f);
+    // tell GLFW to capture our mouse
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-    // unsigned int shaderProgram = createProgram("./shaders/vshader.vs", "./shaders/fshader.fs");
-    // glUseProgram(shaderProgram);
+    ImVec4 clearColor = ImVec4(1.0f, 1.0f, 1.0f, 1.00f);
 
-    // unsigned int VAO;
-    // glGenVertexArrays(1, &VAO);
+    unsigned int shaderProgram = createProgram("./shaders/vshader.vs", "./shaders/fshader.fs");
+    glUseProgram(shaderProgram);
 
-    // setupModelTransformation(shaderProgram);
-    // setupProjectionTransformation(shaderProgram, width , height);
+    unsigned int VAO;
+    glGenVertexArrays(1, &VAO);
 
-    // createCubeObject(shaderProgram, VAO);
+    setupModelTransformation(shaderProgram);
+    setupProjectionTransformation(shaderProgram, width , height);
 
-    // while (!glfwWindowShouldClose(window))
-    // {
+    createPlane(mapHeight, mapWidth, noiseMap, shaderProgram, VAO);
 
-    //     float currentFrame = glfwGetTime();
-    //     deltaTime = currentFrame - lastFrame;
-    //     lastFrame = currentFrame;
+    while (!glfwWindowShouldClose(window))
+    {
 
-    //     // input
-    //     // -----
-    //     processInput(window);
+        float currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
 
-    //     glfwPollEvents();
-    //     setupViewTransformation(shaderProgram);
-    //     // Start the Dear ImGui frame
-    //     ImGui_ImplOpenGL3_NewFrame();
-    //     ImGui_ImplGlfw_NewFrame();
-    //     ImGui::NewFrame();
+        // input
+        // -----
+        processInput(window);
 
-    //     glUseProgram(shaderProgram);
+        glfwPollEvents();
+        setupViewTransformation(shaderProgram);
+        // Start the Dear ImGui frame
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
 
-    //     {
-    //         static float f = 0.0f;
-    //         static int counter = 0;
+        glUseProgram(shaderProgram);
 
-    //         ImGui::Begin("Information");
-    //         ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-    //         ImGui::End();
-    //     }
+        {
+            static float f = 0.0f;
+            static int counter = 0;
 
-    //     // Rendering
-    //     ImGui::Render();
-    //     int display_w, display_h;
-    //     glfwGetFramebufferSize(window, &display_w, &display_h);
-    //     glViewport(0, 0, display_w, display_h);
-    //     glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
-    //     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            ImGui::Begin("Information");
+            ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+            ImGui::End();
+        }
 
-    //     glBindVertexArray(VAO);
+        // Rendering
+        ImGui::Render();
+        int display_w, display_h;
+        glfwGetFramebufferSize(window, &display_w, &display_h);
+        glViewport(0, 0, display_w, display_h);
+        glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //     glDrawArrays(GL_TRIANGLES, 0, 6*2*3);
+        glBindVertexArray(VAO);
 
-    //     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        glDrawArrays(GL_TRIANGLES, 0, (mapWidth-1) * (mapHeight-1) * 6);
 
-    //     glfwSwapBuffers(window);
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-    // }
+        glfwSwapBuffers(window);
 
-    // // Cleanup
-    // cleanup(window);
+    }
 
-    // return 0;
+    // Cleanup
+    cleanup(window);
+
+    return 0;
 }
 
 
@@ -226,6 +238,71 @@ void createCubeObject(unsigned int &program, unsigned int &cube_VAO)
     glEnableVertexAttribArray(vColor_attrib);
     glVertexAttribPointer(vColor_attrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
     delete []expanded_colors;
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0); //Unbind the VAO to disable changes outside this function.
+}
+
+void createPlane(int height, int width, std::vector<float> noiseMap, unsigned int &program, unsigned int &plane_VAO)
+{   
+    glUseProgram(program);
+
+    //Bind shader variables
+    int vVertex_attrib = glGetAttribLocation(program, "vVertex");
+    if(vVertex_attrib == -1) {
+        fprintf(stderr, "Could not bind location: vVertex\n");
+        exit(0);
+    }
+    int vColor_attrib = glGetAttribLocation(program, "vColor");
+    if(vColor_attrib == -1) {
+        fprintf(stderr, "Could not bind location: vColor\n");
+        exit(0);
+    }
+
+    terrain* currTerrain = new terrain(height, width, noiseMap);
+
+    //Generate VAO object
+    glGenVertexArrays(1, &plane_VAO);
+    glBindVertexArray(plane_VAO);
+
+    //Create VBOs for the VAO
+    //Position information (data + format)
+    int nVertices = currTerrain->getTriangleVerticesCount(height, width);
+
+    GLfloat *expanded_vertices = currTerrain->getTrianglePoints();
+
+    GLuint vertex_VBO;
+    glGenBuffers(1, &vertex_VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, vertex_VBO);
+    glBufferData(GL_ARRAY_BUFFER, nVertices*3*sizeof(GLfloat), expanded_vertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(vVertex_attrib);
+    glVertexAttribPointer(vVertex_attrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    delete []expanded_vertices;
+
+    //Color - one for each face
+    //GLfloat *expanded_colors = currTerrain->getTrianglePoints();
+
+    GLfloat *expanded_vertices2 = currTerrain->getTrianglePoints();
+    GLfloat *expanded_colors = new GLfloat[nVertices*3];
+
+    for(int i=0; i<nVertices; i++) {
+        
+        //Assign color according to height
+        expanded_colors[i*3] = lerp(expanded_vertices2[i*3+1]/100.0f, 0, 1);
+        expanded_colors[i*3+1] = lerp(expanded_vertices2[i*3+1]/100.0f, 0, 1);
+        expanded_colors[i*3+2] = lerp(expanded_vertices2[i*3+1]/100.0f, 0, 1);
+    }
+
+    std::cout << 2 <<std::endl;
+
+    GLuint color_VBO;
+    glGenBuffers(1, &color_VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, color_VBO);
+    glBufferData(GL_ARRAY_BUFFER, nVertices*3*sizeof(GLfloat), expanded_colors, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(vColor_attrib);
+    glVertexAttribPointer(vColor_attrib, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    delete []expanded_colors;
+    delete []expanded_vertices2;
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0); //Unbind the VAO to disable changes outside this function.
