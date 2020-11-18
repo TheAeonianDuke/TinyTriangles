@@ -1,6 +1,6 @@
 // [DEAR IMGUI]
 // This is a slightly modified version of stb_rect_pack.h 1.00.
-// Those changes would need to be pushed into nothings/stb:
+// Those changes would need to be pushed into nothings/stb_image:
 // - Added STBRP__CDECL
 // Grep for [DEAR IMGUI] to find the changes.
 

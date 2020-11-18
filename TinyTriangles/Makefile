@@ -17,13 +17,13 @@
 EXE = ./TinyTriangle
 SOURCES = ./src/main.cpp
 SOURCES += ../depends/imgui/imgui_impl_glfw.cpp ../imgui_impl_opengl3.cpp
-SOURCES += ./src/utils.cpp 
+SOURCES += ./src/utils.cpp ./src/perlin.cpp ./src/createimage.cpp
 SOURCES += ../../depends/imgui/imgui.cpp ../../depends/imgui/imgui_demo.cpp ../../depends/imgui/imgui_draw.cpp ../../depends/imgui/imgui_widgets.cpp
 
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 UNAME_S := $(shell uname -s)
 
-CXXFLAGS = -I./src/ -I../ -I../../ -I./depends/imgui -I./depends/glm
+CXXFLAGS = -I./src/ -I../ -I../../ -I./depends/imgui -I./depends/glm -I./depends/glad -I./depends/glm -I./depends/assimp
 CXXFLAGS += -g -Wall -Wformat
 LIBS =
 
@@ -40,7 +40,7 @@ CXXFLAGS += -I./depends/gl3w -DIMGUI_IMPL_OPENGL_LOADER_GL3W
 ##---------------------------------------------------------------------
 ifeq ($(UNAME_S), Linux) #LINUX
 	ECHO_MESSAGE = "Linux"
-	LIBS += -lGL `pkg-config --static --libs glfw3`
+	LIBS += -lGL -lassimp -lstdc++fs `pkg-config --static --libs glfw3`
 
 	CXXFLAGS += `pkg-config --cflags glfw3`
 	CFLAGS = $(CXXFLAGS)
@@ -59,7 +59,7 @@ endif
 
 ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
 	ECHO_MESSAGE = "MinGW"
-	LIBS += -lglfw3 -lgdi32 -lopengl32 -limm32
+	LIBS += -lglfw3 -lgdi32 -lopengl32 -limm32 -lassimp -lstdc++fs
 
 	CXXFLAGS += `pkg-config --cflags glfw3`
 	CFLAGS = $(CXXFLAGS)
@@ -96,5 +96,5 @@ $(EXE): $(OBJS)
 clean:
 #rm -f $(EXE) $(addprefix ./objs/, $(OBJS))
 	rm -rf ./objs
-	rm ./imgui.ini
-	rm $(EXE)
+	#rm ./imgui.ini
+	#rm $(EXE)
