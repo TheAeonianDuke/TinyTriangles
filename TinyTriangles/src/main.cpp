@@ -2,12 +2,19 @@
 #include "camera.h"
 #include "perlin.h"
 #include "createimage.h"
+#include "erosion.h"
 #include "terrain.h"
+
+// Tasks - 
+// 1. Color properly - Done, have to add textures
+// 2. Check if erosion is working - Not sure, hangs for numIterations > 2000. Might need multi threading
+// 3. Stitch terrains
+// 4. Use proper function to scale height - Currently using noisemap^3 * heightMultiplier
 
 int width = 640, height=640;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 40.0f));
+Camera camera(glm::vec3(0.0f, 100.0f, 40.0f));
 float lastX = width / 2.0f;
 float lastY = height / 2.0f;
 bool firstMouse = true;
@@ -15,7 +22,7 @@ float deltaTime = 0.0f;	// time between current frame and last frame
 float lastFrame = 0.0f;
 
 void createCubeObject(unsigned int &, unsigned int &);
-void createPlane(int height, int width, std::vector<float> noiseMap, unsigned int &program, unsigned int &plane_VAO);
+void createPlane(int height, int width, float heightMultiplier, float mapScale, std::vector<float> noiseMap, unsigned int &program, unsigned int &plane_VAO);
 void setupModelTransformation(unsigned int &);
 void setupViewTransformation(unsigned int &);
 void setupProjectionTransformation(unsigned int &, int, int);
@@ -30,21 +37,26 @@ std::vector<float> generateNoiseMap(int chunkHeight, int chunkWidth, int octaves
 int main(int, char**)
 {   
 
-    int mapHeight = 100;
-    int mapWidth = 100;
-    int octaves = 5;
+    int mapHeight = 255;
+    int mapWidth = 255;
+    float heightMultiplier = 50.0f;
+    float mapScale = 1.0f;
+    int octaves = 7;
     float persistence = 0.5f; // Persistence --> Decrease in amplitude of octaves               
     float lacunarity = 2.0f; // Lacunarity  --> Increase in frequency of octaves
     float noiseScale = 64.0f;
 
+    int numIterations = 2000;
+
     
     // Generate height map using perlin noise
     std::vector<float> noiseMap = generateNoiseMap(mapHeight, mapWidth, octaves, persistence, lacunarity, noiseScale);
-    
+    //erode(noiseMap, mapHeight, mapWidth, numIterations);
+
     // Create image of map
     int isImageCreated = createImage(mapHeight, mapWidth, noiseMap, "test");
     if(isImageCreated==0){
-        std::cout << "Image successfully created" <<std::endl;
+        std::cout << "Noise Map Image successfully created" <<std::endl;
     }
 
 
@@ -70,7 +82,7 @@ int main(int, char**)
     setupModelTransformation(shaderProgram);
     setupProjectionTransformation(shaderProgram, width , height);
 
-    createPlane(mapHeight, mapWidth, noiseMap, shaderProgram, VAO);
+    createPlane(mapHeight, mapWidth, heightMultiplier, mapScale, noiseMap, shaderProgram, VAO);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -243,7 +255,7 @@ void createCubeObject(unsigned int &program, unsigned int &cube_VAO)
     glBindVertexArray(0); //Unbind the VAO to disable changes outside this function.
 }
 
-void createPlane(int height, int width, std::vector<float> noiseMap, unsigned int &program, unsigned int &plane_VAO)
+void createPlane(int height, int width, float heightMultiplier, float mapScale, std::vector<float> noiseMap, unsigned int &program, unsigned int &plane_VAO)
 {   
     glUseProgram(program);
 
@@ -259,7 +271,7 @@ void createPlane(int height, int width, std::vector<float> noiseMap, unsigned in
         exit(0);
     }
 
-    terrain* currTerrain = new terrain(height, width, noiseMap);
+    terrain* currTerrain = new terrain(height, width, heightMultiplier, mapScale, noiseMap);
 
     //Generate VAO object
     glGenVertexArrays(1, &plane_VAO);
@@ -285,12 +297,38 @@ void createPlane(int height, int width, std::vector<float> noiseMap, unsigned in
     GLfloat *expanded_vertices2 = currTerrain->getTrianglePoints();
     GLfloat *expanded_colors = new GLfloat[nVertices*3];
 
+    //Creating different terrain types
+    //Height is the upper threshold
+    terrainType snowTerrain = terrainType("snow", heightMultiplier * 1.0f, 0.9, 0.9, 0.9); //white
+    terrainType mountainTerrain = terrainType("mountain", heightMultiplier * 0.4f, 0.37, 0.18, 0.05); //Brown
+    terrainType grassTerrain = terrainType("grass", heightMultiplier * 0.09f, 0.0, 0.49, 0.0); //green
+    terrainType sandTerrain = terrainType("sand", heightMultiplier * 0.06f, 0.95, 0.83, 0.67); //Light Brown
+    terrainType waterTerrain = terrainType("water", heightMultiplier * 0.04f, 0.0, 0.47, 0.75); //Blue
+
+    int terrainCount = 5;
+    std::vector<terrainType> terrainArr;
+    terrainArr.push_back(waterTerrain);
+    terrainArr.push_back(sandTerrain);
+    terrainArr.push_back(grassTerrain);
+    terrainArr.push_back(mountainTerrain);
+    terrainArr.push_back(snowTerrain);
+
     for(int i=0; i<nVertices; i++) {
         
         //Assign color according to height
-        expanded_colors[i*3] = lerp(expanded_vertices2[i*3+1]/100.0f, 0, 1);
-        expanded_colors[i*3+1] = lerp(expanded_vertices2[i*3+1]/100.0f, 0, 1);
-        expanded_colors[i*3+2] = lerp(expanded_vertices2[i*3+1]/100.0f, 0, 1);
+        float currHeight = expanded_vertices2[i*3+1];
+        for(int j = 0; j<terrainCount; j++){
+            if(currHeight <= terrainArr[j].height){
+                // expanded_colors[i*3] = lerp(currHeight/heightMultiplier, 0.3, 1);
+                // expanded_colors[i*3+1] = lerp(currHeight/heightMultiplier, 0.3, 1);
+                // expanded_colors[i*3+2] = lerp(currHeight/heightMultiplier, 0.3, 1);
+                expanded_colors[i*3] = terrainArr[j].red;
+                expanded_colors[i*3+1] = terrainArr[j].green;
+                expanded_colors[i*3+2] = terrainArr[j].blue;
+                break;
+            }
+        }
+        
     }
 
     std::cout << 2 <<std::endl;
@@ -307,6 +345,17 @@ void createPlane(int height, int width, std::vector<float> noiseMap, unsigned in
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0); //Unbind the VAO to disable changes outside this function.
 }
+
+// void createWorldTerrain(int height, int width){
+
+//     public float maxViewDist = 300.0f;
+
+//     int chunkHeight = height - 1;
+//     int chunkHeight = width - 1;
+    
+//     int numChunksVisible =;
+
+// }
 
 void setupModelTransformation(unsigned int &program)
 {
