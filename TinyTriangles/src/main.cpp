@@ -36,7 +36,11 @@ std::map<std::vector<int>, bool> terrainChunkDict; //Keep track of whether terra
 std::vector<std::vector<int>> lastViewedChunks; //Keep track of last viewed vectors
 std::map<std::vector<int>, int> terrainPosVsChunkIndexDict; //Chunk position vs index in map_chunks
 
+//Keep track of number of map chunks
 int countChunks = 0;
+
+//For erosion
+int numIterations = 70000; //NUmber of drops to be simulated
 
 void createPlane(std::vector<int> &position,  int xOffset, int yOffset, int height, int width, float heightMultiplier, float mapScale, unsigned int &program, GLuint &plane_VAO);
 void setupModelTransformation(unsigned int &);
@@ -51,17 +55,12 @@ std::vector<float> generateNoiseMap(int offsetX, int offsetY, int chunkHeight, i
 
 int main(int, char**)
 {   
-
 	//For map generation
 	int mapHeight = 128; //Height of each chunk
 	int mapWidth = 128; //Width of each chunk
 	float heightMultiplier = 50.0f; //Scale for height of peak
 	float mapScale = 1.0f; //Scale for height and breadth of each chunk
 
-
-	//For erosion
-	int numIterations = 2000; //NUmber of drops to be simulated
-	
 	// Setup window
 	GLFWwindow *window = setupWindow(windowWidth, windowHeight);
 	ImGuiIO& io = ImGui::GetIO(); // Create IO object
@@ -87,8 +86,14 @@ int main(int, char**)
 
 	//createWorldTerrain(mapHeight, mapWidth, heightMultiplier, mapScale, shaderProgram, map_chunks, numChunksVisible);
 
-	//Create initial map chunk
-	//createPlane(position, mapHeight, mapWidth, heightMultiplier, mapScale, noiseMap, shaderProgram, VAO);
+	//Create initial map chunk for testing
+
+	//For testing
+	std::vector<int> position(2);
+	std::vector<float> noiseMap = generateNoiseMap(position[0], position[1], mapHeight, mapWidth);
+    unsigned int VAO;
+    glGenVertexArrays(1, &VAO);
+	createPlane(position, 0, 0, mapHeight, mapWidth, 150.0f, mapScale, shaderProgram, VAO);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -105,7 +110,7 @@ int main(int, char**)
 
 
 		//Creating the terrain
-		createWorldTerrain(mapHeight, mapWidth, heightMultiplier, mapScale, shaderProgram, map_chunks, numChunksVisible);
+		//createWorldTerrain(mapHeight, mapWidth, heightMultiplier, mapScale, shaderProgram, map_chunks, numChunksVisible);
 
 		setupViewTransformation(shaderProgram);
 		// Start the Dear ImGui frame
@@ -138,8 +143,9 @@ int main(int, char**)
 			glDrawArrays(GL_TRIANGLES, 0, (mapWidth-1) * (mapHeight-1) * 6);
 		}
 
-		//glBindVertexArray(VAO);
-		//glDrawArrays(GL_TRIANGLES, 0, (mapWidth-1) * (mapHeight-1) * 6 * 9);
+		//For plane test
+		glBindVertexArray(VAO);
+		glDrawArrays(GL_TRIANGLES, 0, (mapWidth-1) * (mapHeight-1) * 6 * 9);
 
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		glfwPollEvents();
@@ -216,13 +222,13 @@ void createPlane(std::vector<int> &position, int xOffset, int yOffset, int heigh
 	std::vector<float> noiseMap = generateNoiseMap(position[0], position[1], height, width);
 
 	//Call erosion function
-	//erode(noiseMap, mapHeight, mapWidth, numIterations);
+	erode(noiseMap, height, width, numIterations);
 
 	// // Create image of map
-	// int isImageCreated = createImage(mapHeight, mapWidth, noiseMap, "test");
-	// if(isImageCreated==0){
-	//     std::cout << "Noise Map Image successfully created" <<std::endl;
-	// }
+	int isImageCreated = createImage(height, width, noiseMap, "noise_map");
+	if(isImageCreated==0){
+	    std::cout << "Noise Map Image successfully created" <<std::endl;
+	}
 
 
 	glUseProgram(program);

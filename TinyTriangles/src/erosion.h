@@ -6,9 +6,9 @@
 #define TINYTRIANGLES_EROSION_H
 
 int seed;
-float erosionRadius = 0.15f; //originally 3
-float inertia = 0.5f; // At zero, water will instantly change direction to flow downhill. At 1, water will never change direction. 
-float sedimentCapacityFactor = 3.0f; // Multiplier for how much sediment a droplet can carry
+float erosionRadius = 3.0f; //originally 3
+float inertia = 0.05f; // At zero, water will instantly change direction to flow downhill. At 1, water will never change direction. 
+float sedimentCapacityFactor = 4.0f; // Multiplier for how much sediment a droplet can carry
 float minSedimentCapacity = 0.01f; // Used to prevent carry capacity getting too close to zero on flatter terrain
 float erodeSpeed = 0.3f;
 float depositSpeed = 0.3f;
@@ -18,6 +18,7 @@ int maxDropletLifetime = 30;
 
 float initialWaterVolume = 1.0f;
 float initialSpeed = 1.0f;
+float borderSize = 10.0f;
 
 // Indices and weights of erosion brush precomputed for every node
 std::vector<std::vector<int>> erosionBrushIndices; 
@@ -59,8 +60,8 @@ std::vector<float> getHeightAndGradient(std::vector<float> &noiseMap, int height
 	std::cout<< "13 "<<std::endl;
 
 	//Calculate drop's direction with bilinear interpolation of height difference along edges
-	float gradientX = height*(heightTopRight - heightTopLeft)*(1-y) + (heightBottomRight - heightBottomLeft) * y;
-	float gradientY = height*(heightBottomLeft - heightTopLeft)*(1-x) + (heightBottomRight - heightTopRight) * x;
+	float gradientX = (heightTopRight - heightTopLeft)*(1-y) + (heightBottomRight - heightBottomLeft) * y;
+	float gradientY = (heightBottomLeft - heightTopLeft)*(1-x) + (heightBottomRight - heightTopRight) * x;
 	
 	float newHeight = heightTopLeft*(1-x)*(1-y) + heightTopRight*(x)*(1-y) + heightBottomLeft*(1-x)*y + heightBottomRight*(x)*(y);
 	std::vector<float> result{newHeight, gradientX, gradientY};
@@ -71,6 +72,9 @@ std::vector<float> getHeightAndGradient(std::vector<float> &noiseMap, int height
 //Used to perform erosion
 void initializeBrushIndices(int height, int width, int radius){
 	
+	erosionBrushIndices.clear();
+	erosionBrushWeights.clear();
+
 	std::vector<int> xOffsets(radius*radius*4, 0);
 	std::vector<int> yOffsets(radius*radius*4, 0);
 	std::vector<float> weights(radius*radius*4, 0);
@@ -82,7 +86,7 @@ void initializeBrushIndices(int height, int width, int radius){
 		int centreX = i%width;
 		int centreY = i/height;
 
-		if(centreY<=radius || centreY>=height - radius || centreX<=radius+1 || centreX>=width - radius){
+		if((centreY<=radius) || (centreY>=height - radius) || (centreX<=radius+1) || (centreX>=width - radius)){
 			weightSum = 0;
 			addIndex = 0;
 
@@ -133,8 +137,8 @@ void erode(std::vector<float> &noiseMap, int height, int width, int numIteration
         	currWidth = width;
     	}
 
-		float posX = (float)(rand() % (100 * width - 1)) / 100.0f;  //Get random X position
-		float posY = (float)(rand() % (100 * height - 1)) / 100.0f;	//Get random Y position
+		float posX = (float)(rand() % (100 * width)) / 100.0f;  //Get random X position
+		float posY = (float)(rand() % (100 * height)) / 100.0f;	//Get random Y position
 
 		float dirX = 0;
 		float dirY = 0;
@@ -189,7 +193,7 @@ void erode(std::vector<float> &noiseMap, int height, int width, int numIteration
 			std::cout<< "22 "<< posY << std::endl;
 			
 			//Check if drop should stop moving or has flowed over the edge of the map
-			if(dirX == 0 && dirY == 0 || posX < 0 || posY <0 || posX > width || posY > height){
+			if((dirX == 0 && dirY == 0) || (posX < borderSize) || (posY <borderSize) || (posX >= width-borderSize) || (posY >= height-borderSize)){
 				break;
 			}
 
@@ -202,9 +206,11 @@ void erode(std::vector<float> &noiseMap, int height, int width, int numIteration
 			std::cout<< "11 "<<std::endl;
 			//Calculate drop's sediment capacity - Check more about this
 			float sedimentCapacity = std::max(-deltaHeight*speed*water*sedimentCapacityFactor, minSedimentCapacity);
+			std::cout << "speed " << speed <<std::endl;
+			std::cout << "sedimentCapacity " << sedimentCapacity << " " << deltaHeight << " " << speed << " " << water << " " << sedimentCapacityFactor << " " << minSedimentCapacity <<std::endl;
 			std::cout<< "7 "<<std::endl;
 			//If carrying more sediment than capacity or if flowing uphill
-			if(sediment > sedimentCapacity || deltaHeight > 0){
+			if((sediment > sedimentCapacity) || (deltaHeight > 0)){
 				//If moving uphill, fill up current height or deposit fraction of excess of sediment
 				float amountToDeposit;
 				if(deltaHeight > 0){
@@ -228,6 +234,7 @@ void erode(std::vector<float> &noiseMap, int height, int width, int numIteration
 				//Erode a fraction of the droplet's current carry capacity
 				//Clamp erosion to change in height so that it doesn't dig a hole in the terrain behind the droplet
 				float amountToErode = std::min((sedimentCapacity - sediment)*erodeSpeed, -deltaHeight); 
+				std::cout << "amountToErode " << amountToErode << " " << sedimentCapacity << " " <<  sediment << " " << erodeSpeed << " " << deltaHeight << std::endl;
 				//float amountToErode = 1000.0f;
 
 
@@ -257,8 +264,15 @@ void erode(std::vector<float> &noiseMap, int height, int width, int numIteration
 			}
 
 			// Update droplet's speed and water content
-			std::cout<< "4 "<<std::endl;
-            speed = sqrt (speed * speed + deltaHeight * gravity);
+			std::cout<< "deltaHeight "<< deltaHeight << std::endl;
+			std::cout<< "speed "<< speed << std::endl;
+            std::cout<< "speed*speed "<< speed*speed << std::endl;
+            std::cout<< "gravity "<< gravity << std::endl;
+            
+            speed = std::max(0.0f, sqrt (speed * speed + deltaHeight * gravity));
+            std::cout<< "speed2 "<< speed << std::endl;
+            std::cout<< "speed*speed2 "<< speed*speed << std::endl;
+            
             water = water * (1 - evaporateSpeed);
             std::cout<< "5 "<<std::endl;
 		}
