@@ -29,7 +29,7 @@ int currWidth;
 int currHeight;
 
 
-std::vector<float> getHeightAndGradient(std::vector<float> noiseMap, int height, int width, float posX, float posY){
+std::vector<float> getHeightAndGradient(std::vector<float> &noiseMap, int height, int width, float posX, float posY){
 	std::cout<< "14 "<<std::endl;
 	int nodeX = (int)posX;
 	int nodeY = (int)posY;
@@ -123,7 +123,7 @@ void initializeBrushIndices(int height, int width, int radius){
 }
 
 
-void erode(std::vector<float> noiseMap, int height, int width, int numIterations){ //height and width are of noise map
+void erode(std::vector<float> &noiseMap, int height, int width, int numIterations){ //height and width are of noise map
 	for(int i = 0; i<numIterations; i++){ //Each randomly placed water droplet
 		
 		if (erosionBrushIndices.empty() || currentErosionRadius != erosionRadius || currHeight != height || currWidth!=width) {
