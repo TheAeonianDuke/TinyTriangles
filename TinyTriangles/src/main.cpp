@@ -89,11 +89,11 @@ int main(int, char**)
 	//Create initial map chunk for testing
 
 	//For testing
-	std::vector<int> position(2);
-	std::vector<float> noiseMap = generateNoiseMap(position[0], position[1], mapHeight, mapWidth);
-    unsigned int VAO;
-    glGenVertexArrays(1, &VAO);
-	createPlane(position, 0, 0, mapHeight, mapWidth, 150.0f, mapScale, shaderProgram, VAO);
+	// std::vector<int> position(2);
+	// std::vector<float> noiseMap = generateNoiseMap(position[0], position[1], mapHeight, mapWidth);
+ //    unsigned int VAO;
+ //    glGenVertexArrays(1, &VAO);
+	// createPlane(position, 0, 0, mapHeight, mapWidth, 150.0f, mapScale, shaderProgram, VAO);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -110,7 +110,7 @@ int main(int, char**)
 
 
 		//Creating the terrain
-		//createWorldTerrain(mapHeight, mapWidth, heightMultiplier, mapScale, shaderProgram, map_chunks, numChunksVisible);
+		createWorldTerrain(mapHeight, mapWidth, heightMultiplier, mapScale, shaderProgram, map_chunks, numChunksVisible);
 
 		setupViewTransformation(shaderProgram);
 		// Start the Dear ImGui frame
@@ -144,8 +144,8 @@ int main(int, char**)
 		}
 
 		//For plane test
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, (mapWidth-1) * (mapHeight-1) * 6 * 9);
+		// glBindVertexArray(VAO);
+		// glDrawArrays(GL_TRIANGLES, 0, (mapWidth-1) * (mapHeight-1) * 6 * 9);
 
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 		glfwPollEvents();
@@ -222,13 +222,13 @@ void createPlane(std::vector<int> &position, int xOffset, int yOffset, int heigh
 	std::vector<float> noiseMap = generateNoiseMap(position[0], position[1], height, width);
 
 	//Call erosion function
-	erode(noiseMap, height, width, numIterations);
+	//erode(noiseMap, height, width, numIterations);
 
 	// // Create image of map
-	int isImageCreated = createImage(height, width, noiseMap, "noise_map");
-	if(isImageCreated==0){
-	    std::cout << "Noise Map Image successfully created" <<std::endl;
-	}
+	// int isImageCreated = createImage(height, width, noiseMap, "noise_map");
+	// if(isImageCreated==0){
+	//     std::cout << "Noise Map Image successfully created" <<std::endl;
+	// }
 
 
 	glUseProgram(program);
