@@ -58,7 +58,7 @@ int main(int, char**)
 	//For map generation
 	int mapHeight = 128; //Height of each chunk
 	int mapWidth = 128; //Width of each chunk
-	float heightMultiplier = 50.0f; //Scale for height of peak
+	float heightMultiplier = 75.0f; //Scale for height of peak
 	float mapScale = 1.0f; //Scale for height and breadth of each chunk
 
 	// Setup window
@@ -124,9 +124,9 @@ int main(int, char**)
 			static float f = 0.0f;
 			static int counter = 0;
 
-			ImGui::Begin("Information");
-			ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			ImGui::End();
+			// ImGui::Begin("Information");
+			// ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			// ImGui::End();
 		}
 
 		// Rendering
@@ -274,9 +274,9 @@ void createPlane(std::vector<int> &position, int xOffset, int yOffset, int heigh
 	//Creating different terrain types
 	//Height is the upper threshold
 	terrainType snowTerrain = terrainType("snow", heightMultiplier * 1.0f, 0.9, 0.9, 0.9); //white
-	terrainType mountainTerrain = terrainType("mountain", heightMultiplier * 0.4f, 0.37, 0.18, 0.05); //Brown
-	terrainType grassTerrain = terrainType("grass", heightMultiplier * 0.09f, 0.0, 0.49, 0.0); //green
-	terrainType sandTerrain = terrainType("sand", heightMultiplier * 0.06f, 0.95, 0.83, 0.67); //Light Brown
+	terrainType mountainTerrain = terrainType("mountain", heightMultiplier * 0.7f, 0.37, 0.18, 0.05); //Brown
+	terrainType grassTerrain = terrainType("grass", heightMultiplier * 0.12f, 0.0, 0.49, 0.0); //green
+	terrainType sandTerrain = terrainType("sand", heightMultiplier * 0.08f, 0.95, 0.83, 0.67); //Light Brown
 	terrainType waterTerrain = terrainType("water", heightMultiplier * 0.04f, 0.0, 0.47, 0.75); //Blue
 
 	int terrainCount = 5;
