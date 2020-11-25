@@ -12,7 +12,22 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dc5a48bd-ab0c-4bcd-84a9-0b2ce880437b" name="Default Changelist" comment="" />
+    <list default="true" id="dc5a48bd-ab0c-4bcd-84a9-0b2ce880437b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/erosion.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/with_erosion.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/without_erosion.bmp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TinyTriangle" beforeDir="false" afterPath="$PROJECT_DIR$/TinyTriangle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/main.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objs/utils.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/model.fs" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/model.fs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shaders/model.vs" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/model.vs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/camera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/shader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrain.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -73,7 +88,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Study/LearnOpenGL/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Study/LearnOpenGL/src/3.model_loading" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -99,11 +114,6 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -116,7 +126,10 @@
       <workItem from="1604859872771" duration="5053000" />
       <workItem from="1605198423264" duration="19512000" />
       <workItem from="1605711688500" duration="1852000" />
-      <workItem from="1605725753083" duration="7617000" />
+      <workItem from="1605725753083" duration="8052000" />
+      <workItem from="1605773486553" duration="1831000" />
+      <workItem from="1606213986637" duration="17729000" />
+      <workItem from="1606292374233" duration="305000" />
     </task>
     <servers />
   </component>
@@ -135,42 +148,66 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="1146" y="345" width="578" height="416" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1605209677664" />
-    <state x="1161" y="324" width="424" height="483" key="FileChooserDialogImpl" timestamp="1605724614200">
+    <state x="1161" y="324" width="424" height="483" key="FileChooserDialogImpl" timestamp="1606282915992">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="1161" y="324" width="424" height="483" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1605724614200" />
-    <state width="894" height="268" key="GridCell.Tab.0.bottom" timestamp="1605733215327">
+    <state x="1161" y="324" width="424" height="483" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1606282915992" />
+    <state width="1874" height="268" key="GridCell.Tab.0.bottom" timestamp="1606286507347">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="894" height="268" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1605733215327" />
-    <state width="894" height="268" key="GridCell.Tab.0.center" timestamp="1605733215326">
+    <state width="1874" height="268" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1606286507347" />
+    <state width="1874" height="268" key="GridCell.Tab.0.center" timestamp="1606286507347">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="894" height="268" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1605733215326" />
-    <state width="894" height="268" key="GridCell.Tab.0.left" timestamp="1605733215325">
+    <state width="1874" height="268" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1606286507347" />
+    <state width="1874" height="268" key="GridCell.Tab.0.left" timestamp="1606286507346">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="894" height="268" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1605733215325" />
-    <state width="894" height="268" key="GridCell.Tab.0.right" timestamp="1605733215326">
+    <state width="1874" height="268" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1606286507346" />
+    <state width="1874" height="268" key="GridCell.Tab.0.right" timestamp="1606286507347">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="894" height="268" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1605733215326" />
+    <state width="1874" height="268" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1606286507347" />
+    <state width="914" height="331" key="GridCell.Tab.1.bottom" timestamp="1606244869809">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="914" height="331" key="GridCell.Tab.1.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1606244869809" />
+    <state width="914" height="331" key="GridCell.Tab.1.center" timestamp="1606244869809">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="914" height="331" key="GridCell.Tab.1.center/0.27.1920.1053@0.27.1920.1053" timestamp="1606244869809" />
+    <state width="914" height="331" key="GridCell.Tab.1.left" timestamp="1606244869809">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="914" height="331" key="GridCell.Tab.1.left/0.27.1920.1053@0.27.1920.1053" timestamp="1606244869809" />
+    <state width="914" height="331" key="GridCell.Tab.1.right" timestamp="1606244869809">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state width="914" height="331" key="GridCell.Tab.1.right/0.27.1920.1053@0.27.1920.1053" timestamp="1606244869809" />
     <state x="898" y="188" key="SettingsEditor" timestamp="1605725731854">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="898" y="188" key="SettingsEditor/0.27.1920.1053@0.27.1920.1053" timestamp="1605725731854" />
+    <state x="613" y="171" width="683" height="764" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1606281546173">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="613" y="171" width="683" height="764" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1606281546173" />
     <state x="1223" y="466" width="423" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605711749670">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="1223" y="466" width="423" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1920.1053@0.27.1920.1053" timestamp="1605711749670" />
-    <state x="1130" y="271" width="620" height="564" key="find.popup" timestamp="1605213589357">
+    <state x="259" y="294" width="620" height="564" key="find.popup" timestamp="1606244610507">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="1130" y="271" width="620" height="564" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1605213589357" />
+    <state x="259" y="294" width="620" height="564" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1606244610507" />
     <state x="1041" y="456" width="778" height="212" key="makefile.clean.confirm.dialog" timestamp="1605725753646">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="1041" y="456" width="778" height="212" key="makefile.clean.confirm.dialog/0.27.1920.1053@0.27.1920.1053" timestamp="1605725753646" />
+    <state x="624" y="254" key="run.anything.popup" timestamp="1606245638183">
+      <screen x="0" y="27" width="1920" height="1053" />
+    </state>
+    <state x="624" y="254" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1606245638183" />
     <state x="1103" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1605732683128">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>

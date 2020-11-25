@@ -9,8 +9,19 @@ uniform mat4 model;
 uniform mat4 view;
 uniform mat4 projection;
 
+
+in vec3 vVertex;
+in vec3 vColor;
+uniform mat4 vModel;
+uniform mat4 vView;
+uniform mat4 vProjection;
+
+
 void main()
 {
     TexCoords = aTexCoords;
     gl_Position = projection * view * model * vec4(aPos, 1.0);
+
+    //gl_Position = vProjection * vView * vModel * vec4(vVertex, 1.0);
+    //fColor = vColor; //Interpolate color
 }

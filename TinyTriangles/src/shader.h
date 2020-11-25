@@ -112,6 +112,14 @@ public:
         glUseProgram(ID);
     }
 
+    int getUniformLocation(const char* type){
+        return glGetUniformLocation(ID, type);
+    }
+
+    int getAttribLocation(const char* type){
+        return glGetAttribLocation(ID, type);
+    }
+
     void setBool(const std::string &name, bool value) const
     {
         glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
