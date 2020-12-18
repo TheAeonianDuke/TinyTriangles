@@ -50,6 +50,13 @@ void main() {
 
 	totLight = diffLight + specLight;
 
-	fColor = vColor * totLight; //Interpolate color
+	//Calculate fog
+	float fogCoord = abs(distance(camPosition, vVertex)) / 5;
+	float fogDensity = 0.04f;
+	float fogIntensity = exp(-fogDensity*fogCoord);
+	fogIntensity = 1.0-clamp(fogIntensity, 0.0, 1.0);
+	vec3 fogColor = vec3(0.7f, 0.7f, 0.7f);
+
+	fColor = mix(vColor * totLight, fogColor, fogIntensity); //Interpolate color
 
 }
