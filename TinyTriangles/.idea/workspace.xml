@@ -13,20 +13,84 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc5a48bd-ab0c-4bcd-84a9-0b2ce880437b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/erosion.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/with_erosion.bmp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/without_erosion.bmp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/TinyTriangle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/imgui.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/.mayaSwatches/bark_0021.jpg.swatch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/DB2X2_L01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/DB2X2_L01_Spec.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbm/.mayaSwatches/DB2X2_L01.png.swatch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbm/.mayaSwatches/DB2X2_L01_Nor.png.swatch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbm/.mayaSwatches/DB2X2_L01_Spec.png.swatch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbm/.mayaSwatches/bark_0021.jpg.swatch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbm/DB2X2_L01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbm/DB2X2_L01_Nor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbm/DB2X2_L01_Spec.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbm/bark_0021.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.fbx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.mtl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/Tree.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/bark_0021.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/tree.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/Tree/tree2.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/ao.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/backpack.mtl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/backpack.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/diffuse.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/monkey.mtl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/monkey.obj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/normal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/roughness.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/source_attribution.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objects/specular.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/createimage.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/gl3w.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/imgui.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/imgui_demo.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/imgui_draw.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/imgui_impl_glfw.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/imgui_impl_opengl3.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/imgui_widgets.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/main.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/perlin.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/objs/utils.o" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/shaders/model.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/shaders/model.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/src/mesh.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Anshul/TinyTriangles/src/modelLoader.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shaders/skybox.fs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shaders/skybox.vs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SOIL.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/back.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/bottom.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/front.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/grass.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/graycloud_bk.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/graycloud_dn.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/graycloud_ft.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/graycloud_lf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/graycloud_rt.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/graycloud_up.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/left.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/miramar_bk.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/miramar_dn.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/miramar_ft.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/miramar_lf.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/miramar_rt.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/miramar_up.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/right.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/rock.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/skydome4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/snow.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tex/top.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TinyTriangle" beforeDir="false" afterPath="$PROJECT_DIR$/TinyTriangle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/objs/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/main.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/objs/utils.o" beforeDir="false" afterPath="$PROJECT_DIR$/objs/utils.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shaders/model.fs" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/model.fs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shaders/model.vs" beforeDir="false" afterPath="$PROJECT_DIR$/shaders/model.vs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/camera.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/shader.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/terrain.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrain.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +152,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Study/LearnOpenGL/src/3.model_loading" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Anshul/TinyTriangles" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -100,6 +164,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/depends/assimp" />
     </key>
   </component>
@@ -112,6 +177,11 @@
     <configuration default="true" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="TinyTriangles" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
@@ -129,7 +199,15 @@
       <workItem from="1605725753083" duration="8052000" />
       <workItem from="1605773486553" duration="1831000" />
       <workItem from="1606213986637" duration="17729000" />
-      <workItem from="1606292374233" duration="305000" />
+      <workItem from="1606292374233" duration="3020000" />
+      <workItem from="1606937534177" duration="6286000" />
+      <workItem from="1607355180253" duration="3145000" />
+      <workItem from="1607360776120" duration="9623000" />
+      <workItem from="1607401946022" duration="2018000" />
+      <workItem from="1608309176207" duration="718000" />
+      <workItem from="1608310701403" duration="33000" />
+      <workItem from="1608310745467" duration="3067000" />
+      <workItem from="1608364556329" duration="4417000" />
     </task>
     <servers />
   </component>
@@ -140,34 +218,34 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="836" y="211" width="1084" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605725733586">
+    <state x="836" y="211" width="1084" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1608310687915">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="836" y="211" width="1084" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1605725733586" />
+    <state x="836" y="211" width="1084" height="711" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.27.1920.1053@0.27.1920.1053" timestamp="1608310687915" />
     <state x="1146" y="345" width="578" height="416" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605209677664">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="1146" y="345" width="578" height="416" key="#com.intellij.fileTypes.FileTypeChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1605209677664" />
-    <state x="1161" y="324" width="424" height="483" key="FileChooserDialogImpl" timestamp="1606282915992">
+    <state x="1161" y="324" width="424" height="483" key="FileChooserDialogImpl" timestamp="1608364583385">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="1161" y="324" width="424" height="483" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1606282915992" />
-    <state width="1874" height="268" key="GridCell.Tab.0.bottom" timestamp="1606286507347">
+    <state x="1161" y="324" width="424" height="483" key="FileChooserDialogImpl/0.27.1920.1053@0.27.1920.1053" timestamp="1608364583385" />
+    <state width="1874" height="267" key="GridCell.Tab.0.bottom" timestamp="1608369617451">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="268" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1606286507347" />
-    <state width="1874" height="268" key="GridCell.Tab.0.center" timestamp="1606286507347">
+    <state width="1874" height="267" key="GridCell.Tab.0.bottom/0.27.1920.1053@0.27.1920.1053" timestamp="1608369617451" />
+    <state width="1874" height="267" key="GridCell.Tab.0.center" timestamp="1608369617450">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="268" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1606286507347" />
-    <state width="1874" height="268" key="GridCell.Tab.0.left" timestamp="1606286507346">
+    <state width="1874" height="267" key="GridCell.Tab.0.center/0.27.1920.1053@0.27.1920.1053" timestamp="1608369617450" />
+    <state width="1874" height="267" key="GridCell.Tab.0.left" timestamp="1608369617450">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="268" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1606286507346" />
-    <state width="1874" height="268" key="GridCell.Tab.0.right" timestamp="1606286507347">
+    <state width="1874" height="267" key="GridCell.Tab.0.left/0.27.1920.1053@0.27.1920.1053" timestamp="1608369617450" />
+    <state width="1874" height="267" key="GridCell.Tab.0.right" timestamp="1608369617450">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state width="1874" height="268" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1606286507347" />
+    <state width="1874" height="267" key="GridCell.Tab.0.right/0.27.1920.1053@0.27.1920.1053" timestamp="1608369617450" />
     <state width="914" height="331" key="GridCell.Tab.1.bottom" timestamp="1606244869809">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
@@ -192,25 +270,25 @@
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="613" y="171" width="683" height="764" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1920.1053@0.27.1920.1053" timestamp="1606281546173" />
-    <state x="1223" y="466" width="423" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605711749670">
+    <state x="1223" y="466" width="423" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1607355820130">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="1223" y="466" width="423" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1920.1053@0.27.1920.1053" timestamp="1605711749670" />
-    <state x="259" y="294" width="620" height="564" key="find.popup" timestamp="1606244610507">
+    <state x="1223" y="466" width="423" height="173" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.27.1920.1053@0.27.1920.1053" timestamp="1607355820130" />
+    <state x="259" y="294" width="620" height="564" key="find.popup" timestamp="1608313247956">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="259" y="294" width="620" height="564" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1606244610507" />
-    <state x="1041" y="456" width="778" height="212" key="makefile.clean.confirm.dialog" timestamp="1605725753646">
+    <state x="259" y="294" width="620" height="564" key="find.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1608313247956" />
+    <state x="1041" y="456" width="758" height="212" key="makefile.clean.confirm.dialog" timestamp="1608310748177">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="1041" y="456" width="778" height="212" key="makefile.clean.confirm.dialog/0.27.1920.1053@0.27.1920.1053" timestamp="1605725753646" />
+    <state x="1041" y="456" width="758" height="212" key="makefile.clean.confirm.dialog/0.27.1920.1053@0.27.1920.1053" timestamp="1608310748177" />
     <state x="624" y="254" key="run.anything.popup" timestamp="1606245638183">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
     <state x="624" y="254" key="run.anything.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1606245638183" />
-    <state x="1103" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1605732683128">
+    <state x="1103" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1607355667656">
       <screen x="0" y="27" width="1920" height="1053" />
     </state>
-    <state x="1103" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1605732683128" />
+    <state x="1103" y="259" width="672" height="678" key="search.everywhere.popup/0.27.1920.1053@0.27.1920.1053" timestamp="1607355667656" />
   </component>
 </project>

@@ -40,7 +40,7 @@ CXXFLAGS += -I./depends/gl3w -DIMGUI_IMPL_OPENGL_LOADER_GL3W
 ##---------------------------------------------------------------------
 ifeq ($(UNAME_S), Linux) #LINUX
 	ECHO_MESSAGE = "Linux"
-	LIBS += -lGL -lassimp -lstdc++fs `pkg-config --static --libs glfw3`
+	LIBS += -lGL -lassimp -lSOIL -lstdc++fs `pkg-config --static --libs glfw3`
 
 	CXXFLAGS += `pkg-config --cflags glfw3`
 	CFLAGS = $(CXXFLAGS)
@@ -59,7 +59,7 @@ endif
 
 ifeq ($(findstring MINGW,$(UNAME_S)),MINGW)
 	ECHO_MESSAGE = "MinGW"
-	LIBS += -lglfw3 -lgdi32 -lopengl32 -limm32 -lassimp -lstdc++fs
+	LIBS += -lglfw3 -lgdi32 -lopengl32 -limm32 -lassimp -lstdc++fs -lSOIL
 
 	CXXFLAGS += `pkg-config --cflags glfw3`
 	CFLAGS = $(CXXFLAGS)
